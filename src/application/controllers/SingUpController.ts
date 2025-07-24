@@ -10,12 +10,13 @@ const schema = z.object({
 });
 
 export class SingUpController implements IController {
+  constructor(private readonly signUpUseCase: SignUpUseCase) {}
+
   async handle({ body }: IRequest): Promise<IResponse> {
     try {
       const { email, name, password } = schema.parse(body);
 
-      const signUpUseCase = new SignUpUseCase();
-      await signUpUseCase.execute({ name, email, password });
+      await this.signUpUseCase.execute({ name, email, password });
 
       return {
         statusCode: STATUS_CODE.NO_CONTENT,
