@@ -1,26 +1,25 @@
 import { STATUS_CODE } from "../errors/statusCode";
 import { IController, IRequest, IResponse } from "../interfaces/IController";
 import { z, ZodError } from "zod";
-import { SignUpUseCase } from "../useCases/SignUpUseCase";
-import { AccountAlreadyExistError } from "../errors/customErrors";
+import { SignInUseCase } from "../useCases/SingInUseCase";
+import { InvalidCredentialsError } from "../errors/customErrors";
 
 const schema = z.object({
-  name: z.string().min(2),
   email: z.email().min(2),
   password: z.string().min(8),
 });
 
 export class SingUpController implements IController {
-  constructor(private readonly signUpUseCase: SignUpUseCase) {}
+  constructor(private readonly signInUseCase: SignInUseCase) {}
 
   async handle({ body }: IRequest): Promise<IResponse> {
     try {
-      const { email, name, password } = schema.parse(body);
+      const { email, password } = schema.parse(body);
 
-      await this.signUpUseCase.execute({ name, email, password });
+      await this.signInUseCase.execute({ email, password });
 
       return {
-        statusCode: STATUS_CODE.NO_CONTENT,
+        statusCode: STATUS_CODE.CONFLICT,
         body: null,
       };
     } catch (error) {
@@ -31,10 +30,12 @@ export class SingUpController implements IController {
         };
       }
 
-      if (error instanceof AccountAlreadyExistError) {
+      if (error instanceof InvalidCredentialsError) {
         return {
-          statusCode: STATUS_CODE.CONFLICT,
-          body: { error: "Account already exists" },
+          statusCode: STATUS_CODE.NOT_AUTHORIZED,
+          body: {
+            error: "Invalid Credentials",
+          },
         };
       }
 
