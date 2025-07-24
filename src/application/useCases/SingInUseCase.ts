@@ -13,9 +13,9 @@ interface IOutput {
   accessToken: string;
 }
 
-export class SignUpUseCase {
+export class SignInUseCase {
   async execute({ email, password }: IInput): Promise<IOutput> {
-    const account = prismaClient.accounts.findUnique({
+    const account = await prismaClient.account.findUnique({
       where: { email },
     });
 
@@ -23,7 +23,7 @@ export class SignUpUseCase {
       throw new InvalidCredentialsError();
     }
 
-    const isPasswordValid = compare(password, account.password);
+    const isPasswordValid = await compare(password, account.password);
 
     if (!isPasswordValid) {
       throw new InvalidCredentialsError();

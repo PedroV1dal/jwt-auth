@@ -12,7 +12,7 @@ type IOutput = void;
 
 export class SignUpUseCase {
   async execute({ name, email, password }: IInput): Promise<IOutput> {
-    const accountAlreadyExist = await prismaClient.accounts.findUnique({
+    const accountAlreadyExist = await prismaClient.account.findUnique({
       where: { email },
     });
 
@@ -22,7 +22,7 @@ export class SignUpUseCase {
 
     const hashedPassword = await hash(password, 10);
 
-    await prismaClient.accounts.create({
+    await prismaClient.account.create({
       data: {
         email,
         name,
