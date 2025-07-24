@@ -1,8 +1,8 @@
 import { sign } from "jsonwebtoken";
-import { InvalidCredentialsError } from "../errorHandler/InvalidCredentialsError";
 import { prismaClient } from "../lib/prismaClient";
 import { env } from "../../env";
 import { compare } from "bcryptjs";
+import { InvalidCredentialsError } from "../errors/customErrors";
 
 interface IInput {
   email: string;

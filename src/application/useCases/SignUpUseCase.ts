@@ -1,4 +1,4 @@
-import { AccountAlreadyExistError } from "../errorHandler/AccountAlreadyExistError";
+import { AccountAlreadyExistError } from "../errors/customErrors";
 import { prismaClient } from "../lib/prismaClient";
 import { hash } from "bcryptjs";
 
