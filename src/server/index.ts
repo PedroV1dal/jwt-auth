@@ -1,5 +1,4 @@
 import express from "express";
-import { STATUS_CODE } from "../application/errors/statusCode";
 import { SingUpController } from "../application/controllers/SingUpController";
 import { SignUpUseCase } from "../application/useCases/SignUpUseCase";
 import { SingInController } from "../application/controllers/SingInController";
