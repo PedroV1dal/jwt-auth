@@ -10,7 +10,7 @@ const schema = z.object({
   password: z.string().min(8),
 });
 
-export class SingUpController implements IController {
+export class SingInController implements IController {
   constructor(private readonly signInUseCase: SignInUseCase) {}
 
   async handle({ body }: IRequest): Promise<IResponse> {
