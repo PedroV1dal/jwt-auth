@@ -17,11 +17,15 @@ export class SingInController implements IController {
     try {
       const { email, password } = schema.parse(body);
 
-      await this.signInUseCase.execute({ email, password });
+      const acessToken = await this.signInUseCase.execute({ email, password });
+
+      const { accessToken } = acessToken;
 
       return {
-        statusCode: STATUS_CODE.CONFLICT,
-        body: null,
+        statusCode: STATUS_CODE.OK,
+        body: {
+          accessToken,
+        },
       };
     } catch (error) {
       if (error instanceof ZodError) {
