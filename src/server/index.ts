@@ -1,17 +1,13 @@
 import express from "express";
-import { SingUpController } from "../application/controllers/SingUpController";
-import { SignUpUseCase } from "../application/useCases/SignUpUseCase";
-import { SingInController } from "../application/controllers/SingInController";
-import { SignInUseCase } from "../application/useCases/SingInUseCase";
+import { makeSignUpController } from "../factories/makeSignUpContoller";
+import { makeSignInController } from "../factories/makeSignInContoller";
 
 const app = express();
 
 app.use(express.json());
 
 app.get("/sign-up", async (req, res) => {
-  const SALT = 10;
-  const signUpUseCase = new SignUpUseCase(SALT);
-  const signUpController = new SingUpController(signUpUseCase);
+  const signUpController = makeSignUpController();
 
   const { body, statusCode } = await signUpController.handle({
     body: req.body,
@@ -21,7 +17,7 @@ app.get("/sign-up", async (req, res) => {
 });
 
 app.post("/sign-in", async (req, res) => {
-  const singInController = new SingInController(new SignInUseCase());
+  const singInController = makeSignInController();
 
   const { body, statusCode } = await singInController.handle({
     body: req.body,
