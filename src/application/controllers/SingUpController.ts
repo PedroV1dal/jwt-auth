@@ -3,6 +3,7 @@ import { IController, IRequest, IResponse } from "../interfaces/IController";
 import { z, ZodError } from "zod";
 import { SignUpUseCase } from "../useCases/SignUpUseCase";
 import { AccountAlreadyExistError } from "../errors/customErrors";
+import { parseZodIssues } from "../utils/zodError.issues";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -27,7 +28,7 @@ export class SingUpController implements IController {
       if (error instanceof ZodError) {
         return {
           statusCode: STATUS_CODE.BAD_REQUEST,
-          body: error.issues,
+          body: parseZodIssues(error.issues),
         };
       }
 
