@@ -14,7 +14,7 @@ export function routeAdapter(controller: IController) {
     const { body, statusCode } = await controller.handle({
       body: req.body,
       params: req.params,
-      accountId: req.metadata.accountId,
+      accountId: req.metadata?.accountId,
     });
 
     res.status(statusCode).json(body);
