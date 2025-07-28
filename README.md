@@ -1,26 +1,52 @@
-Esse projeto foi feito com o intuito de estudo pessoal, contém aplicações simples onde em um cenário real seriam refatoradas para uma melhor aplicação
+# JWT Authentication - Projeto de Estudo
 
-## Conceito do projeto
+Este projeto foi desenvolvido para fins de estudo pessoal. Ele contém implementações simples que, em um cenário real, seriam refatoradas para uma aplicação mais robusta.
 
-Estudar a aplicação real de autorização utilizando JWT
+---
 
-Aplicar conceitos de clean arch para uma melhor organização de código
+## Conceito do Projeto
+
+- Estudar a aplicação real de autorização utilizando **JWT**
+- Aplicar conceitos de **Clean Architecture** para uma melhor organização do código
+
+---
 
 ## Arquitetura
 
-O projeto foi separado em Application e Server
+O projeto está dividido em dois principais módulos: **Application** e **Server**.
 
-Application:
+### Application
 
-Controllers: Lógica das rotas
-Interfaces: Tipagens
-errors: erros personalizados
-lib: configurações de libs externas
-middleware: Middlewares para validação e autenticação
-useCases: Lógicas da regra de negócio
-utils: funções para ajudar no desenvolvimento em geral
+- **Controllers:** Lógica das rotas
+- **Interfaces:** Tipagens
+- **errors:** Erros personalizados
+- **lib:** Configurações de libs externas
+- **middleware:** Middlewares para validação e autenticação
+- **useCases:** Lógicas da regra de negócio
+- **utils:** Funções auxiliares para o desenvolvimento
 
-Server:
+### Server
 
-adapter: Funções para adaptar controllers e middlewares às rotas do Express
-index: index: Arquivo principal para inicialização do servidor e definição das rotas
+- **adapter:** Funções para adaptar controllers e middlewares às rotas do Express
+- **index:** Arquivo principal para inicialização do servidor e definição das rotas
+
+---
+
+## Como rodar
+
+```bash
+# Instale as dependências
+npm install
+
+# Inicie o servidor
+npm run dev
+```
+
+---
+
+## Referências
+
+- [Documentação JWT](https://jwt.io/introduction)
+- [Clean Architecture](https://github.com/eduardomoroni/clean-architecture-examples)
+
+---
