@@ -10,8 +10,11 @@ import { IController } from "../../application/interfaces/IController";
 
 export function routeAdapter(controller: IController) {
   return async (req: Request, res: Response) => {
+    console.log("Route adapter called with request:", req);
     const { body, statusCode } = await controller.handle({
       body: req.body,
+      params: req.params,
+      accountId: req.metadata.accountId,
     });
 
     res.status(statusCode).json(body);

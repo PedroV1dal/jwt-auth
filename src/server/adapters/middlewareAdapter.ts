@@ -11,7 +11,11 @@ export function middlewareAdapter(controller: IMiddleware) {
       return res.status(result.statusCode).json(result.body);
     }
 
-    console.log(result.data);
+    req.metadata = {
+      ...req.metadata,
+      ...result.data,
+    };
+
     next();
   };
 }
