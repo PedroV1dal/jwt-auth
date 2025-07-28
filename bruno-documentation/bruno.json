@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "name": "bruno-documentation",
+  "name": "jwt-auth",
   "type": "collection",
   "ignore": [
     "node_modules",

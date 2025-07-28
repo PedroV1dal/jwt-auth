@@ -18,3 +18,9 @@ export class AccountAlreadyExistError extends AuthError {
     super(message);
   }
 }
+
+export class UnauthorizedError extends AuthError {
+  constructor(message: string = "Unauthorized") {
+    super(message);
+  }
+}
